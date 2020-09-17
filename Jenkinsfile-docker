@@ -3,7 +3,13 @@ pipeline {
 
     triggers {
         pollSCM '* * * * *'
+        githubpush()
     }
+    
+     environment {
+        REMOTE_ADDRESS = "192.168.0.47"
+    }
+
     stages {
         stage('Build') {
             steps {
