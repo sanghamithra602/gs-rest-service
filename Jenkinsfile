@@ -1,12 +1,18 @@
 pipeline {
     agent any
-    tools {
-        gradle "GRADLE_LATEST"
+
+    triggers {
+        pollSCM '* * * * *'
     }
     stages {
-        stage('Gradle') {
+        stage('Build') {
             steps {
-                sh 'gradle --version'
+                sh './gradlew assemble'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew test'
             }
         }
     }
